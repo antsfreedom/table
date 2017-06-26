@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>table相关基础</title>
+	<link rel="stylesheet" href="">
+	<style type="text/css" media="screen">
+		table{
+			border-collapse: collapse;
+			width:600px;
+		}
+		th,td{
+			border:1px solid #000;
+			text-align: center;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var obtn1 = document.getElementById("btn1");
+			var obtn2 = document.getElementById("btn2");
+			var otab = document.getElementById("tab");
+			var onam = document.getElementById("nam");
+			var oage = document.getElementById("age");
+			var osex = document.getElementById("sex");
+			var oadd = document.getElementById("add");
+			var newA = document.getElementsByTagName("a");
+			var initC =null;
+			var row1 = otab.tBodies[0].rows;
+//行的隐藏与出现
+			obtn1.onclick = function(){
+				var tr1=otab.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0];
+				tr1.style.display = "none"
+			}
+
+			obtn2.onclick = function(){
+				var tr1=otab.getElementsByTagName("tbody")[0].getElementsByTagName("tr")[0];
+				tr1.style.display = "table-row"
+			}
+//隔行变色
+			for(var i=0;i<row1.length;i++){
+				if(i%2 != 0){
+					row1[i].style.backgroundColor = "#ccc"
+				}
+				
+				row1[i].onmouseover = function(){
+				 initC =this.style.backgroundColor;
+
+					this.style.backgroundColor ="yellow"
+				}
+				row1[i].onmouseout = function(){
+					this.style.backgroundColor =initC
+				}
+			}
+			var newTr = document.createElement("tr");
+			var newTd = document.createElement("td");
+
+//添加行
+	oadd.onclick = function(){
+		var newTr = document.createElement("tr");
+
+		var newTd = document.createElement("td");
+		newTd.innerHTML = otab.tBodies[0].rows.length +1;
+		newTr.appendChild(newTd)
+
+		var newTd = document.createElement("td");
+		newTd.innerHTML = onam.value;
+		newTr.appendChild(newTd)
+
+		var newTd = document.createElement("td");
+		newTd.innerHTML = oage.value;
+		newTr.appendChild(newTd)
+
+		var newTd = document.createElement("td");
+		newTd.innerHTML = osex.value;
+		newTr.appendChild(newTd)
+
+		var newTd = document.createElement("td");
+		newTd.innerHTML = '<a href="javascript:">delete</a>';
+		newTr.appendChild(newTd)
+		otab.tBodies[0].appendChild(newTr)
+
+		for(var i=0;i<row1.length;i++){
+				if(i%2 !=0){
+					row1[i].style.backgroundColor = "#ccc"
+				}
+				
+				row1[i].onmouseover = function(){
+				 initC =this.style.backgroundColor;
+
+					this.style.backgroundColor ="yellow"
+				}
+				row1[i].onmouseout = function(){
+					this.style.backgroundColor =initC
+				}
+			}
+
+			for(var i=0;i<newA.length;i++){
+				newA[i].onclick = function(){
+				otab.tBodies[0].removeChild(this.parentNode.parentNode)
+			}
+		}
+	}
+//删除行
+	for(var i=0;i<newA.length;i++){
+		newA[i].onclick = function(){
+			otab.tBodies[0].removeChild(this.parentNode.parentNode)
+		}
+	}
+//搜索
+	var inp_name = document.getElementById("find");	
+	var sear = document.getElementById("search");
+	inp_name.onclick = function(){
+		var oname = sear.value;
+		for(var i=0;i<row1.length;i++){
+			row1[i].style.backgroundColor = ""
+			var innerName = row1[i].cells[1].innerText;
+				if(oname ==innerName){
+					row1[i].style.backgroundColor = "green"
+				}		
+		}
+	}	
+}
+	</script>
+</head>
+<body>
+	<input type="text" value="name" id=nam>
+	<input type="text" value="age" id=age>
+	<input type="text" value="sex" id=sex>
+	<input type="button" value="add" id=add >
+	<table id="tab">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>name</th>
+				<th>age</th>
+				<th>sex</th>
+				<th>operation</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>cat</td>
+				<td>13</td>
+				<td>boy</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>dog</td>
+				<td>13</td>
+				<td>girl</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>fish</td>
+				<td>5</td>
+				<td>boy</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>elephant</td>
+				<td>16</td>
+				<td>girl</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>bird</td>
+				<td>10</td>
+				<td>boy</td>
+				<td><a href="javascript:">delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	<input type="button" value="hide" id=btn1>
+	<input type="button" value="show" id=btn2>
+	<input type="text" value="search" id=search>
+	<input type="button" value="搜索" id=find>
+</body>
+</html>
