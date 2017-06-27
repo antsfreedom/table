@@ -120,6 +120,25 @@
 				}		
 		}
 	}	
+
+//增加一个排序功能，按年龄大小排序
+var ages = otab.tHead.rows[0].cells[2];
+	ages.onclick = function(){
+		var arr = []
+		for(var i=0;i<row1.length;i++){
+			arr[i]=row1[i]
+		}
+		arr.sort(function(tr1,tr2){
+				var a = parseInt(tr1.cells[2].innerText);
+				var b = parseInt(tr2.cells[2].innerText);
+				return a-b;				
+		})
+
+		for(var i=0;i<arr.length;i++){
+			otab.appendChild(arr[i])
+		}
+	}
+
 }
 	</script>
 </head>
@@ -149,7 +168,7 @@
 			<tr>
 				<td>2</td>
 				<td>dog</td>
-				<td>13</td>
+				<td>34</td>
 				<td>girl</td>
 				<td><a href="javascript:">delete</a></td>
 			</tr>
@@ -163,14 +182,14 @@
 			<tr>
 				<td>4</td>
 				<td>elephant</td>
-				<td>16</td>
+				<td>21</td>
 				<td>girl</td>
 				<td><a href="javascript:">delete</a></td>
 			</tr>
 			<tr>
 				<td>5</td>
 				<td>bird</td>
-				<td>10</td>
+				<td>18</td>
 				<td>boy</td>
 				<td><a href="javascript:">delete</a></td>
 			</tr>
